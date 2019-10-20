@@ -5,7 +5,7 @@ orbs:
   win: circleci/windows@1.0.0
 
 jobs:
-  build_linux:
+  build:
     docker:
       - image: circleci/python:3.7.4
 
