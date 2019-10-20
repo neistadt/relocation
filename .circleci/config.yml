@@ -20,20 +20,20 @@ jobs:
             . venv/bin/activate
             pip install -r dev_requirements.txt
             virtualenv --no-site-packages --always-copy movable
-            . venv/movable/bin/activate
+            . movable/bin/activate
             pip install -r requirements.txt
       - run:
           name: package movable virtualenv
           command: |
             . venv/bin/activate
-            venv-pack -p venv/movable
+            venv-pack -p movable
       - run:
           name: test move virtual environment
           command: |
             mkdir moved
             tar -xzf movable.tar.gz -C moved
             . moved/bin/activate
-            python moved/versions.py
+            python versions.py
 
   build_windows:
     executor: win/vs2019
