@@ -39,7 +39,7 @@ jobs:
             python versions.py
 
   build_windows:
-    executor: windows
+    executor: win/default
     steps:
       - checkout
       - run:
