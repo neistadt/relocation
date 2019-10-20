@@ -29,5 +29,5 @@ jobs:
             mkdir moved
             tar -xzf movable.tar.gz -C moved
             . moved/bin/activate
-            python moved/versions.py
+            python versions.py
 
