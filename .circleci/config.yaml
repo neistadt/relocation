@@ -1,0 +1,30 @@
+# Python CircleCI 2.0 configuration file
+version: 2.1
+jobs:
+  build:
+    docker:
+      - image: circleci/python:3.7.4
+
+    working_directory: ~/relocation-app
+
+    steps:
+      - checkout
+      - run:
+          name: install dependencies
+          command: |
+            pip install virtualenv venv-pack
+            virtualenv --no-site-packages --always-copy venv
+            . venv/bin/activate
+            pip install -r requirements.txt
+      - run:
+          name: package venv
+          command: |
+            venv-pack -p venv
+      - run:
+          name: test move virtual environment
+          command: |
+            mkdir moved
+            tar -xzf venv.tar.gz -C moved
+            . moved/bin/activate
+            python moved/versions.py
+
