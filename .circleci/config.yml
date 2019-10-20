@@ -1,7 +1,11 @@
 # Python CircleCI 2.0 configuration file
-version: 2
+version: 2.1
+
+orbs:
+  win: circleci/windows@1.0.0
+
 jobs:
-  build:
+  build_linux:
     docker:
       - image: circleci/python:3.7.4
 
@@ -31,3 +35,8 @@ jobs:
             . moved/bin/activate
             python moved/versions.py
 
+  build_windows:
+    executor: win/vs2019
+    steps:
+      - checkout
+      - run: Write-Host 'Hello, Windows'
