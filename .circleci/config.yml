@@ -48,29 +48,28 @@ jobs:
       - run:
           name: install dependencies
           command: |
-            python --version
-#            python3 -m venv venv
-#            . venv/bin/activate
-#            pip install -r dev_requirements.txt
-#      - run:
-#          name: setup movable virtualenv
-#          command: |
-#            . venv/bin/activate
-#            virtualenv --no-site-packages --always-copy movable
-#            . movable/bin/activate
-#            pip install -r requirements.txt
-#      - run:
-#          name: package movable virtualenv
-#          command: |
-#            . venv/bin/activate
-#            venv-pack -p movable
-#      - run:
-#          name: test move virtual environment
-#          command: |
-#            mkdir moved
-#            tar -xzf movable.tar.gz -C moved
-#            . moved/bin/activate
-#            python versions.py
+            python3 -m venv venv
+            venv/bin/activate.bat
+            pip install -r dev_requirements.txt
+      - run:
+          name: setup movable virtualenv
+          command: |
+            venv/bin/activate.bat
+            virtualenv --no-site-packages --always-copy movable
+            movable/bin/activate.bat
+            pip install -r requirements.txt
+      - run:
+          name: package movable virtualenv
+          command: |
+            venv/bin/activate.bat
+            venv-pack --format zip -p movable
+      - run:
+          name: test move virtual environment
+          command: |
+            md moved
+            Expand-Archive movable.zip -DestinationPath moved
+            moved/bin/activate.bat
+            python versions.py
 
 workflows:
   version: 2
