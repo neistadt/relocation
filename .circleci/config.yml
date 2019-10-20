@@ -39,7 +39,7 @@ jobs:
             python versions.py
 
   build_windows:
-    executor: win/vs2019
+    executor: win
     steps:
       - checkout
       - run:
