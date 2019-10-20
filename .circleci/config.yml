@@ -12,19 +12,22 @@ jobs:
       - run:
           name: install dependencies
           command: |
-            pip install virtualenv venv-pack
-            virtualenv --no-site-packages --always-copy venv
+            python3 -m venv venv
             . venv/bin/activate
+            pip install -r dev_requirements.txt
+            virtualenv --no-site-packages --always-copy movable
+            . venv/movable/bin/activate
             pip install -r requirements.txt
       - run:
-          name: package venv
+          name: package movable virtualenv
           command: |
-            venv-pack -p venv
+            . venv/bin/activate
+            venv-pack -p venv/movable
       - run:
           name: test move virtual environment
           command: |
             mkdir moved
-            tar -xzf venv.tar.gz -C moved
+            tar -xzf movable.tar.gz -C moved
             . moved/bin/activate
             python moved/versions.py
 
