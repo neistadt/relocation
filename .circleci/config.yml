@@ -47,17 +47,17 @@ jobs:
           command: |
             pip install -r dev_requirements.txt
       - run:
+          name: patch venv-pack for windows support
+          command: |
+            where.exe venv-pack
+      #            md movable\lib\python3.7\site-packages\venv_pack\scripts\nt
+      #            copy activate.bat movable\lib\python3.7\site-packages\venv_pack\scripts\nt
+      - run:
           name: setup movable virtualenv
           command: |
             virtualenv --no-site-packages --always-copy movable
             movable\Scripts\activate.bat
             pip install -r requirements.txt
-      - run:
-          name: patch venv-pack for windows support
-          command: |
-            Get-ChildItem -Recurse -Directory movable
-#            md movable\lib\python3.7\site-packages\venv_pack\scripts\nt
-#            copy activate.bat movable\lib\python3.7\site-packages\venv_pack\scripts\nt
       - run:
           name: package movable virtualenv
           command: |
